@@ -1,7 +1,7 @@
 class Payment < ApplicationRecord
   belongs_to :card, optional: true
 
-  has_one: coupon
+  has_one: customer_order
   
   enum :status, {
     pending_payment: 1,
