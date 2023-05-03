@@ -6,6 +6,7 @@ class CreateJoinTableCustomersOrders < ActiveRecord::Migration[7.0]
 
       t.index [:customer_id, :order_id], unique: true
 
+      t.timestamps
     end
   end
 end
