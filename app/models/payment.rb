@@ -1,6 +1,8 @@
 class Payment < ApplicationRecord
   belongs_to :card, optional: true
 
+  has_one: coupon
+  
   enum :status, {
     pending_payment: 1,
     paid: 2,
