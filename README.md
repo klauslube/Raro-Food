@@ -8,7 +8,7 @@ Antes de iniciar a aplicação, recomenda-se a execução da seguinte sequência
 
 ```bash
 rvm use 3.1.2
-cd raro-food
+cd klaus-lube-exercicio-semana-8
 bundle install
 rails db:create
 rails db:migrate
@@ -109,3 +109,78 @@ Para corrigí-los, pode ser executado o comando:
 ```bash
 rubocop -A
 ```
+
+# Implementação
+Na aplicação foi adicionado 4 entidades novas:
+
+
+1- Card
+  - customerId (FK) INT NOT NULL
+  - name STRING NOT NULL
+  - card number STRING NOT NULL
+  - CVV Code STRING NOT NULL
+  - card type INT NOT NULL
+  - expiration date STRING NOT NULL
+
+2- Payment
+  - cardId (FK) INT NOT NULL
+  - payment method INT NOT NULL
+  - paid amount DECIMAL NOT NULL
+  - status INT NOT NULL
+
+3- Coupon
+  - administratorId (FK) INT NOT NULL
+  - code STRING NOT NULL
+  - name STRING NOT NULL
+  - description TEXT NOT NULL
+  - start date DATE NOT NULL
+  - end date DATE NOT NULL
+  - discount amount DECIMAL NOT NULL
+
+
+4- CustomerOrder
+  - customerId (PK) INT NOT NULL
+  - orderId (PK) INT NOT NULL
+  - couponId (FK) INT NOT NULL
+  - paymentId (FK) INT NOT NULL
+
+
+<hr>
+
+
+## Relacionamentos entre tabelas
+
+
+
+- Relacionamento 1:1
+  - Pagamento <b>UTILIZA</b> Cupom
+  - ClientePedido <b>EXIGE</b> Pagamento (join table)
+
+
+- Relacionamento 1:N
+  - Cliente <b>CADASTRA</b> Cartão
+  - Administrador <b>CADASTRA</b> Cupom
+  - Cliente <b>REALIZA</b> Pedido
+  - ClientePedido <b>UTILIZA</b> Cupom
+
+<hr>
+
+
+## Problemas econtrados 
+No projeto, ao ser clonado foi preciso mudar o socket e o password no arquivo database.yml, só assim a aplicação consegue rodar rails db:create.
+
+Mas decidi não subir o arquivo database.yml e nem schema como foi informado em aula. Deixando o setup igual ao clonado inicialmente.
+
+<hr>
+
+
+## Desafios 
+
+Nesse projeto, tive como maior desafio a interpretação do diagrama de entidade-relacionamento e codificar corretamente as relações entre entidades, principalmente a Join table, a qual tive dúvida se devia criar um model para ela ou não. 
+
+
+<hr>
+
+
+## AUTOR
+Este projeto foi desenvolvido por Klaus Lube, como parte do exercício semanal da Raro Academy(Professor Guilherme Andrade) para aprimorar as habilidades em Active Record, models, migrations e rails.
